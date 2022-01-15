@@ -28,8 +28,10 @@ class ModuleOperatorMouseDeltaRotate(BlenderModule):
                 mouse_delta_y = event.mouse_y - self.mouse_origin_y
 
                 # Set the rotation delta values to match the mouse deltas
-                context.object.delta_rotation_euler.x = self.obj_rotation_delta_origin_x + mouse_delta_y * 0.01
-                context.object.delta_rotation_euler.z = -1.0 * (self.obj_rotation_delta_origin_z + mouse_delta_x * 0.01)
+                context.object.delta_rotation_euler.x = self.obj_rotation_delta_origin_x + \
+                    mouse_delta_y * 0.01
+                context.object.delta_rotation_euler.z = -1.0 * \
+                    (self.obj_rotation_delta_origin_z + mouse_delta_x * 0.01)
 
             # Left click to confirm
             elif event.type == 'LEFTMOUSE':
@@ -62,13 +64,21 @@ class ModuleOperatorMouseDeltaRotate(BlenderModule):
                 self.report({'WARNING'}, "No active object, could not finish")
                 return {'CANCELLED'}
 
+    @staticmethod
+    def menu_func(self, context):
+        """An optional ability to invoke this operator through the `Object` menu"""
+        self.layout.operator(ModuleOperatorMouseDeltaRotate.MouseDeltaRotateOperator.bl_idname,
+                             text=ModuleOperatorMouseDeltaRotate.MouseDeltaRotateOperator.bl_label)
+
     def register_blender_module(self):
         bpy.utils.register_class(
             ModuleOperatorMouseDeltaRotate.MouseDeltaRotateOperator)
+        bpy.types.VIEW3D_MT_object.append(lambda x, y: ModuleOperatorMouseDeltaRotate.menu_func(x, y))
 
     def unregister_blender_module(self):
         bpy.utils.unregister_class(
             ModuleOperatorMouseDeltaRotate.MouseDeltaRotateOperator)
+        bpy.types.VIEW3D_MT_object.remove(lambda x, y: ModuleOperatorMouseDeltaRotate.menu_func(x, y))
 
     def get_name(self):
         return "Mouse Delta Rotation"
