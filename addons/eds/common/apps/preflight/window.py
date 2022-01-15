@@ -1,16 +1,20 @@
+from ...qt.qt_lines import QHLine
+from PySide2 import QtWidgets
+from PySide2.QtCore import Qt, QEventLoop
+import pkgutil
 import logging
 logger = logging.getLogger("eds.apps.preflight")
 
-import pkgutil
-
-from PySide2.QtCore import Qt, QEventLoop
-from PySide2 import QtWidgets
-from ...qt.qt_lines import QHLine
 
 class PreflightWindow(QtWidgets.QWidget):
-    
-    def __init__(self, parent=None):
+
+    def __init__(self, checks: list, parent=None):
         super(PreflightWindow, self).__init__(parent)
+
+        # Populate a cache of checks and their last known result
+        self.checks = {}
+        for check in checks:
+            self.checks[check()] = None
 
         # Configure the window's display settings
         self.setWindowFlags(
@@ -31,12 +35,89 @@ class PreflightWindow(QtWidgets.QWidget):
         self.layout().addWidget(self.label)
 
         # Set some info text below the title
-        self.info_text = QtWidgets.QLabel("Various automated checks for your projects.\nYour DCC may freeze while this is open.")
+        self.info_text = QtWidgets.QLabel(
+            "Various automated checks for your projects.\nYour DCC may freeze while this is open.")
         self.layout().addWidget(self.info_text)
         self.layout().addWidget(QHLine())
 
         # Create the list of checks
-        
+        # self.check_scroll_area = QtWidgets.QScrollArea()
+        # self.check_scroll_area.horizontalScrollBarPolicy = Qt.ScrollBarAlwaysOff
+        # self.check_scroll_area.setFrameShape(QtWidgets.QFrame.NoFrame)
+        self.check_table = QtWidgets.QTableWidget()
+        self.check_table.setColumnCount(1)
+        self.check_table.setRowCount(len(self.checks))
+        self.check_table.horizontalHeader().setVisible(False)
+        self.check_table.horizontalHeader().setSectionResizeMode(
+            QtWidgets.QHeaderView.Stretch)
+        self.check_table.verticalHeader().setVisible(False)
+        self.check_table.setSizePolicy(
+            QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
+        self.check_table.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
+        self.check_table.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn)
+        # self.check_scroll_area.addWidget(self.check_table)
+        self.layout().addWidget(self.check_table)
 
-        # Fill in remaining space with a stretch
-        self.layout().addStretch()
+        # Populate the list of checks
+        self.repopulate_check_list()
+
+        # Add a button to run all checks and a button to run all fixes
+        self.action_layout = QtWidgets.QHBoxLayout()
+        self.action_layout.setAlignment(Qt.AlignVCenter)
+        self.layout().addLayout(self.action_layout)
+
+        self.run_all_button = QtWidgets.QPushButton("Check All")
+        self.run_all_button.setMinimumHeight(20)
+        self.run_all_button.clicked.connect(lambda: self.run_all_checks())
+        self.action_layout.addWidget(self.run_all_button)
+
+        self.fix_all_button = QtWidgets.QPushButton("Fix All")
+        self.fix_all_button.setMinimumHeight(20)
+        self.fix_all_button.clicked.connect(lambda: self.fix_all_checks())
+        self.action_layout.addWidget(self.fix_all_button)
+
+    def repopulate_check_list(self):
+        # Clear the check list
+        self.check_table.setRowCount(0)
+        self.check_table.setRowCount(len(self.checks))
+
+        for i, check in enumerate(self.checks):
+            check_result = self.checks[check]
+
+            # Build a widget for this check
+            check_widget = QtWidgets.QWidget()
+            check_layout = QtWidgets.QHBoxLayout()
+            check_layout.setMargin(0)
+            check_layout.setAlignment(Qt.AlignVCenter)
+            check_widget.setLayout(check_layout)
+
+            # If the check has a result, set the widget's background color
+            if check_result is not None:
+                if check_result.success:
+                    check_widget.setStyleSheet("background-color: green")
+                else:
+                    check_widget.setStyleSheet("background-color: red")
+
+            # Build the row for this check
+            check_label = QtWidgets.QLabel(check.get_name())
+            check_label.setMargin(5)
+            check_layout.addWidget(check_label)
+            check_layout.addStretch()
+
+            # If the check has auto-fix, add a button to it
+            if check.can_auto_fix():
+                fix_button = QtWidgets.QPushButton("Fix")
+                fix_button.setMinimumHeight(20)
+                fix_button.clicked.connect(
+                    lambda: self.fix_check(check))
+                check_layout.addWidget(fix_button)
+
+            # Add a button to manually run the check
+            run_button = QtWidgets.QPushButton("Check")
+            run_button.setMinimumHeight(20)
+            run_button.clicked.connect(
+                lambda: self.run_check(check))
+            check_layout.addWidget(run_button)
+
+            # Add the check widget to the list
+            self.check_table.setCellWidget(i, 0, check_widget)

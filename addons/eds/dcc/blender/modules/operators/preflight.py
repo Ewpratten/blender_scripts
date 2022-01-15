@@ -1,4 +1,5 @@
 
+from eds.dcc.blender.preflight import BLENDER_PREFLIGHT_CHECK_LIST
 from eds.dcc.blender.module import BlenderModule
 from eds.common.apps.preflight import launch_preflight
 
@@ -16,7 +17,7 @@ class ModuleOperatorPreflightLaunch(BlenderModule):
 
         def execute(self, context):
             logger.info("Launching preflight tool")
-            launch_preflight()
+            launch_preflight(checks=BLENDER_PREFLIGHT_CHECK_LIST)
             return {"FINISHED"}
 
     def register_blender_module(self):

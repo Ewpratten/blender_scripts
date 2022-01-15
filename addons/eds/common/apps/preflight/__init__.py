@@ -11,7 +11,7 @@ logger = logging.getLogger("eds.apps.preflight")
 preflight_app = None
 
 
-def launch_preflight(parent=None):
+def launch_preflight(checks: list, parent=None):
     global preflight_app
     logger.info("Starting Preflight")
 
@@ -27,7 +27,7 @@ def launch_preflight(parent=None):
                 "Could not create QApplication. Is it already running?")
 
     # Create and show the Preflight window
-    w = window.PreflightWindow(parent=parent)
+    w = window.PreflightWindow(parent=parent, checks=checks)
     w.show()
 
     # If there is no parent, we must run the QApplication
