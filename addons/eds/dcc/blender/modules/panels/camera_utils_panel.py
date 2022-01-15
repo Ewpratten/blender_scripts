@@ -31,16 +31,6 @@ class ModuleCameraUtils(BlenderModule):
             row = layout.row()
             row.operator("object.mouse_delta_rotate", text="Mouse Delta Look")
 
-            # row = layout.row()
-            # row.label(text="Hello world!", icon='WORLD_DATA')
-
-            # row = layout.row()
-            # row.label(text="Active object is: " + obj.name)
-            # row = layout.row()
-            # row.prop(obj, "name")
-
-            # row = layout.row()
-            # row.operator("mesh.primitive_cube_add")
 
     def register_blender_module(self):
         bpy.utils.register_class(ModuleCameraUtils.CameraUtilsPanel)

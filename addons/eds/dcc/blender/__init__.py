@@ -1,17 +1,23 @@
+from eds.dcc.blender.modules.operators.preflight import ModuleOperatorPreflightLaunch
+from eds.dcc.blender.modules.topbar.eds import ModuleEdsTopbar
+from eds.dcc.blender.modules.operators.mouse_delta_rotation import ModuleOperatorMouseDeltaRotate
+from eds.dcc.blender.modules.panels.camera_utils_panel import ModuleCameraUtils
+from eds.dcc.blender.modules.add_menu.pos_y_camera import ModuleAddYAlignedCamera
+
+
+import bpy
 import logging
 logger = logging.getLogger("eds.blender")
-import bpy
 
 # Modules
-from eds.dcc.blender.modules.add_menu.pos_y_camera import ModuleAddYAlignedCamera
-from eds.dcc.blender.modules.panels.camera_utils_panel import ModuleCameraUtils
-from eds.dcc.blender.modules.operators.mouse_delta_rotation import ModuleOperatorMouseDeltaRotate
 
 # List of independent modules to load
 BLENDER_LOAD_MODULES = [
     ModuleAddYAlignedCamera,
     ModuleCameraUtils,
-    ModuleOperatorMouseDeltaRotate
+    ModuleOperatorMouseDeltaRotate,
+    ModuleEdsTopbar,
+    ModuleOperatorPreflightLaunch
 ]
 
 
