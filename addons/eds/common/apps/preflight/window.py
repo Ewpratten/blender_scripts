@@ -26,14 +26,17 @@ class PreflightWindow(QtWidgets.QWidget):
         self.setStyleSheet(stylesheet.decode("utf-8"))
 
         # Configure the title at the top of the window
-        self.label = QtWidgets.QLabel("Evan's Preflight Checklist")
+        self.label = QtWidgets.QLabel("Preflight Checklist")
         self.label.setProperty('labelClass', 'label-title')
         self.layout().addWidget(self.label)
 
         # Set some info text below the title
-        self.info_text = QtWidgets.QLabel("Various automated checks for your projects.")
+        self.info_text = QtWidgets.QLabel("Various automated checks for your projects.\nYour DCC may freeze while this is open.")
         self.layout().addWidget(self.info_text)
         self.layout().addWidget(QHLine())
+
+        # Create the list of checks
+        
 
         # Fill in remaining space with a stretch
         self.layout().addStretch()

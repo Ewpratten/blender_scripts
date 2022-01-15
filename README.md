@@ -12,3 +12,5 @@ This repo contains a Python package that can be loaded into multiple DCCs. It co
 ## Using with Blender
 
 Just clone this repo, and add it as your scripts directory in `Edit > Preferences > File Paths > Scripts`. All add-ons will show up in the add-ons menu.
+
+You will also need PySide2 installed on your system.
