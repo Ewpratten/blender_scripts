@@ -20,8 +20,14 @@ class PreflightCheckHasCamera(PreflightCheck):
         if result.success:
             return
         else:
+            # Create a new camera
             bpy.ops.object.camera_add()
-            bpy.context.scene.camera.name = "Camera"
+
+            # Set the camera to be the active camera
+            bpy.context.scene.camera = bpy.context.object
+
+            # Set the camera's name
+            bpy.context.object.name = "Camera"
 
     def get_name(self) -> str:
         """Returns the name of the check"""

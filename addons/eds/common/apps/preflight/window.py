@@ -1,3 +1,4 @@
+from .preflight_check import PreflightCheck
 from ...qt.qt_lines import QHLine
 from PySide2 import QtWidgets
 from PySide2.QtCore import Qt, QEventLoop
@@ -121,3 +122,29 @@ class PreflightWindow(QtWidgets.QWidget):
 
             # Add the check widget to the list
             self.check_table.setCellWidget(i, 0, check_widget)
+
+    def run_check(self, check: PreflightCheck, skip_repopulate=False):
+        # Run the check and update the UI
+        self.checks[check] = check.run_check()
+        if not skip_repopulate:
+            self.repopulate_check_list()
+
+    def fix_check(self, check: PreflightCheck, skip_repopulate=False):
+        # This only works if the check has an auto-fix flag, and has been run before
+        last_check_result = self.checks[check]
+        if check.can_auto_fix() and last_check_result is not None:
+            check.run_fix(last_check_result)
+            if not skip_repopulate:
+                self.repopulate_check_list()
+
+    def run_all_checks(self):
+        # Run all checks and update the UI
+        for check in self.checks:
+            self.run_check(check, skip_repopulate=True)
+        self.repopulate_check_list()
+
+    def fix_all_checks(self):
+        # This only works if the check has an auto-fix flag, and has been run before
+        for check in self.checks:
+            self.fix_check(check, skip_repopulate=True)
+        self.repopulate_check_list()
