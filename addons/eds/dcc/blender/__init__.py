@@ -2,11 +2,16 @@ import logging
 logger = logging.getLogger("eds.blender")
 import bpy
 
-from eds.dcc.blender.add_object.pos_y_camera import ModuleAddYAlignedCamera
+# Modules
+from eds.dcc.blender.modules.add_menu.pos_y_camera import ModuleAddYAlignedCamera
+from eds.dcc.blender.modules.panels.camera_utils_panel import ModuleCameraUtils
+from eds.dcc.blender.modules.operators.mouse_delta_rotation import ModuleOperatorMouseDeltaRotate
 
 # List of independent modules to load
 BLENDER_LOAD_MODULES = [
-    ModuleAddYAlignedCamera
+    ModuleAddYAlignedCamera,
+    ModuleCameraUtils,
+    ModuleOperatorMouseDeltaRotate
 ]
 
 
