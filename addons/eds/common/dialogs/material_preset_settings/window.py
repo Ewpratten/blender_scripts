@@ -11,6 +11,7 @@ class MaterialPresetSettingsResponse:
     world_bg_material: str = None
     create_regular: bool = True
     create_grease_pencil: bool = True
+    create_grease_pencil_fills: bool = False
 
 
 class MaterialPresetSettingsWindow(QtWidgets.QWidget):
@@ -84,9 +85,24 @@ class MaterialPresetSettingsWindow(QtWidgets.QWidget):
         self.grease_pencil_set_layout.addStretch()
         self.grease_pencil_set_checkbox = QtWidgets.QCheckBox()
         self.grease_pencil_set_checkbox.setChecked(True)
+        self.grease_pencil_set_checkbox.stateChanged.connect(
+            lambda state: self.grease_pencil_fill_checkbox.setEnabled(state))
         self.grease_pencil_set_layout.addWidget(
             self.grease_pencil_set_checkbox)
         self.layout().addLayout(self.grease_pencil_set_layout)
+
+        # Add a selection for if the grease pencil material should have a separate "fills" counterpart
+        self.grease_pencil_fill_layout = QtWidgets.QHBoxLayout()
+        self.grease_pencil_fill_layout.setAlignment(Qt.AlignLeft)
+        self.grease_pencil_fill_label = QtWidgets.QLabel(
+            "Create explicit Grease Pencil fill materials")
+        self.grease_pencil_fill_layout.addWidget(self.grease_pencil_fill_label)
+        self.grease_pencil_fill_layout.addStretch()
+        self.grease_pencil_fill_checkbox = QtWidgets.QCheckBox()
+        self.grease_pencil_fill_checkbox.setChecked(False)
+        self.grease_pencil_fill_layout.addWidget(
+            self.grease_pencil_fill_checkbox)
+        self.layout().addLayout(self.grease_pencil_fill_layout)
 
         # Add a horizontal line to separate the buttons
         self.layout().addWidget(QHLine())
@@ -108,6 +124,7 @@ class MaterialPresetSettingsWindow(QtWidgets.QWidget):
             self._settings.world_bg_material = self.bg_material_dropdown.currentText()
         self._settings.create_grease_pencil = self.grease_pencil_set_checkbox.isChecked()
         self._settings.create_regular = self.regular_set_checkbox.isChecked()
+        self._settings.create_grease_pencil_fills = self.grease_pencil_fill_checkbox.isChecked()
 
         # Close the window
         self.close()

@@ -62,9 +62,37 @@ class AbstractMaterialLoadOperator(bpy.types.Operator):
                 material_gp.grease_pencil.color = (
                     *hex_to_rgb(material_color), 1.0)
 
+                # If we are not creating fill materials, we can add the fill color straight into this material
+                if not settings.create_grease_pencil_fills:
+                    material_gp.grease_pencil.fill_color = (
+                        *hex_to_rgb(material_color), 1.0)
+
+                # If the user wanted to load this as a fill material, do that
+                else:
+
+                    # We use a different name format to distinguish the grease pencil versions of materials
+                    material_gp_fill_name = f"{material_name} (GP Fill)"
+
+                    # Skip if already created
+                    if material_gp_fill_name in bpy.data.materials:
+                        logger.info("Material already created: %s",
+                                    material_name)
+                        continue
+
+                    # Create a new material
+                    material_gp_fill = bpy.data.materials.new(
+                        material_gp_fill_name)
+                    logger.debug("Created material: %s", material_gp_fill_name)
+                    bpy.data.materials.create_gpencil_data(material_gp_fill)
+                    material_gp_fill.grease_pencil.show_fill = True
+                    material_gp_fill.grease_pencil.show_stroke = False
+                    material_gp_fill.grease_pencil.fill_color = (
+                        *hex_to_rgb(material_color), 1.0)
+
         # If the user wanted to set the background, do that
         if settings.world_bg_material:
-            logger.info(f"Setting world background to: {settings.world_bg_material}")
+            logger.info(
+                f"Setting world background to: {settings.world_bg_material}")
             bpy.context.scene.world.node_tree.nodes["Background"].inputs[0].default_value = (
                 *hex_to_rgb(self.material_set[settings.world_bg_material]), 1.0)
 

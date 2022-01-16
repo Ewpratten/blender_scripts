@@ -14,3 +14,7 @@ QComboBox:disabled {
     color: #444444;
 }
     
+QCheckBox:disabled {
+    background-color:#272727;
+    color: #444444;
+}
