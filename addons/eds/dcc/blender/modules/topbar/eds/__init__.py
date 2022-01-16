@@ -13,6 +13,7 @@ class ModuleEdsTopbar(BlenderModule):
         def draw(self, context):
             layout = self.layout
             layout.operator("scene.launch_preflight")
+            layout.menu("TOPBAR_MT_eds_material_menu")
 
         def menu_draw(self, context):
             """Drawing entrypoint for the root of this menu structure"""

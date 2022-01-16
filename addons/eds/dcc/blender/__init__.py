@@ -1,3 +1,5 @@
+from eds.dcc.blender.modules.topbar.eds.material_set.nord import ModuleLoadMaterialPresetNord
+from eds.dcc.blender.modules.topbar.eds.material_set import ModuleEdsTopbarMaterialLoader
 from eds.dcc.blender.modules.operators.preflight import ModuleOperatorPreflightLaunch
 from eds.dcc.blender.modules.topbar.eds import ModuleEdsTopbar
 from eds.dcc.blender.modules.operators.mouse_delta_rotation import ModuleOperatorMouseDeltaRotate
@@ -17,7 +19,9 @@ BLENDER_LOAD_MODULES = [
     ModuleCameraUtils,
     ModuleOperatorMouseDeltaRotate,
     ModuleEdsTopbar,
-    ModuleOperatorPreflightLaunch
+    ModuleOperatorPreflightLaunch,
+    ModuleEdsTopbarMaterialLoader,
+    ModuleLoadMaterialPresetNord
 ]
 
 
