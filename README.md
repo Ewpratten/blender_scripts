@@ -11,6 +11,10 @@ This repo contains a Python package that can be loaded into multiple DCCs. It co
 - "Pre-flight" Checklist system
   - Runs automated unit tests on your scenes and attempts to fix any issues found
   - DCC-agnostic
+- Camera Picker
+  - For working in scenes with multiple cameras
+- Material presets
+  - Quickly load various color palettes into your material set
 
 ## Using with Blender
 
