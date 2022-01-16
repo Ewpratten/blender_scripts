@@ -1,3 +1,4 @@
+from eds.common.qt.qt_window_center import center_window
 from .preflight_check import PreflightCheck
 from ...qt.qt_lines import QHLine
 from PySide2 import QtWidgets
@@ -22,6 +23,7 @@ class PreflightWindow(QtWidgets.QWidget):
             self.windowFlags() ^ Qt.WindowStaysOnTopHint)
         self.setWindowTitle("Preflight")
         self.resize(400, 600)
+        center_window(self)
 
         # Set the root of the application to be a vertical list
         self.setLayout(QtWidgets.QVBoxLayout())

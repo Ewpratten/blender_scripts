@@ -1,6 +1,7 @@
 import os
 
 from eds import MODULE_PATH
+from eds.common.qt.qt_window_center import center_window
 from ...qt.qt_lines import QHLine
 from PySide2 import QtWidgets
 from PySide2.QtCore import Qt
@@ -19,6 +20,7 @@ class SelfUpdaterWindow(QtWidgets.QWidget):
             self.windowFlags() ^ Qt.WindowStaysOnTopHint)
         self.setWindowTitle("EDS Self-Updater")
         self.resize(400, 300)
+        center_window(self)
 
         # Set the root of the application to be a vertical list
         self.setLayout(QtWidgets.QVBoxLayout())
@@ -51,6 +53,7 @@ class SelfUpdaterWindow(QtWidgets.QWidget):
 
         # Add a list for all available versoins
         self.versions_list = QtWidgets.QListWidget()
+        self.versions_list.setSelectionMode(QtWidgets.QAbstractItemView.SingleSelection)
         self.layout().addWidget(self.versions_list)
         self.redraw_versions_list()
 

@@ -1,4 +1,6 @@
 from typing import Optional
+
+from eds.common.qt.qt_window_center import center_window
 from ...qt.qt_lines import QHLine
 from PySide2 import QtWidgets
 from PySide2.QtCore import Qt
@@ -26,6 +28,7 @@ class MaterialPresetSettingsWindow(QtWidgets.QWidget):
             self.windowFlags() ^ Qt.WindowStaysOnTopHint)
         self.setWindowTitle("Preset Loading Options")
         self.resize(300, 200)
+        center_window(self)
 
         # Set the root of the application to be a vertical list
         self.setLayout(QtWidgets.QVBoxLayout())

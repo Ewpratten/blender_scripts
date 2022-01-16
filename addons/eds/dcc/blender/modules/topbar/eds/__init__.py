@@ -14,6 +14,7 @@ class ModuleEdsTopbar(BlenderModule):
             layout = self.layout
             layout.operator("scene.launch_preflight")
             layout.menu("TOPBAR_MT_eds_material_menu")
+            layout.operator("scene.launch_camera_picker")
             layout.separator()
             layout.operator("scene.launch_self_updater")
 

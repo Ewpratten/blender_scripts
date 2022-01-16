@@ -8,7 +8,7 @@ logger = logging.getLogger("eds.blender")
 
 
 class ModuleOperatorSelfUpdaterLaunch(BlenderModule):
-    """This operator will launch the preflight tool"""
+    """This operator will launch the self-updater tool"""
 
     class SelfUpdaterLaunchOperator(bpy.types.Operator):
         bl_idname = "scene.launch_self_updater"

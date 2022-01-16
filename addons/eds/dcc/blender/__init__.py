@@ -1,3 +1,4 @@
+from eds.dcc.blender.modules.operators.camera_picker import ModuleOperatorCameraPickerLaunch
 from eds.dcc.blender.modules.operators.self_updater import ModuleOperatorSelfUpdaterLaunch
 from eds.dcc.blender.modules.topbar.eds.material_set.freya import ModuleLoadMaterialPresetFreya
 from eds.dcc.blender.modules.topbar.eds.material_set.miwu import ModuleLoadMaterialPresetMiwu
@@ -28,6 +29,7 @@ BLENDER_LOAD_MODULES = [
     ModuleLoadMaterialPresetMiwu,
     ModuleLoadMaterialPresetFreya,
     ModuleOperatorSelfUpdaterLaunch,
+    ModuleOperatorCameraPickerLaunch,
 ]
 
 
