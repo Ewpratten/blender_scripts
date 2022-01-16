@@ -13,6 +13,10 @@ from . import log_cfg
 log_cfg.configure_eds_logging()
 logger = logging.getLogger("eds")
 
+# Keep track of the path to this module for reference by other scripts
+import pathlib
+MODULE_PATH = pathlib.Path(__file__).parent.resolve()
+
 # Handle attempting to load the blender modules
 try:
     logger.info("Attempting to load blender modules")

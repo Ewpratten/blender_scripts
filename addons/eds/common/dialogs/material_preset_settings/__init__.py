@@ -10,7 +10,6 @@ logger = logging.getLogger("eds.apps.preflight")
 
 
 def launch_material_preset_settings(material_names, preset_name, parent=None) -> Optional[window.MaterialPresetSettingsResponse]:
-    global preflight_app
     logger.info("Starting material preset settings select dialog")
 
     # Create an application wrapper and run the app
