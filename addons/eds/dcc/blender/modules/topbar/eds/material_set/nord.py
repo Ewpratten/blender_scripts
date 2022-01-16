@@ -18,6 +18,7 @@ NORD_MATERIALS = {
 }
 
 
+from .op_load_material_preset import AbstractMaterialLoadOperator
 from eds.dcc.blender.module import BlenderModule
 from eds.common.utils.hex_rgb import hex_to_rgb
 
@@ -28,40 +29,45 @@ logger = logging.getLogger("eds.blender")
 
 class ModuleLoadMaterialPresetNord(BlenderModule):
 
-    class LoadNordMaterialOperator(bpy.types.Operator):
+    class LoadNordMaterialOperator(AbstractMaterialLoadOperator):
         bl_idname = "scene.load_nord_material_preset"
         bl_label = "Load Nord Materials"
 
-        def execute(self, context):
-            logger.info("Loading the Nord materials")
+        def __init__(self):
+            super().__init__("Nord", NORD_MATERIALS)
+        # bl_idname = "scene.load_nord_material_preset"
+        # bl_label = "Load Nord Materials"
 
-            # For every material name defined, load it
-            is_first = True
-            for material_name, material_color in NORD_MATERIALS.items():
-                logger.info("Loading material: %s", material_name)
+        # def execute(self, context):
+        #     logger.info("Loading the Nord materials")
 
-                # Skip if already created
-                if material_name in bpy.data.materials:
-                    logger.info("Material already created: %s", material_name)
-                    continue
+        #     # For every material name defined, load it
+        #     is_first = True
+        #     for material_name, material_color in NORD_MATERIALS.items():
+        #         logger.info("Loading material: %s", material_name)
 
-                # Create a new material
-                material = bpy.data.materials.new(material_name)
-                # Set the material color
-                material.diffuse_color = (*hex_to_rgb(material_color), 1.0)
+        #         # Skip if already created
+        #         if material_name in bpy.data.materials:
+        #             logger.info("Material already created: %s", material_name)
+        #             continue
 
-                # Add grease pencil version material
-                material_gp = bpy.data.materials.new(material_name + " (GP)")
-                bpy.data.materials.create_gpencil_data(material_gp)
-                material_gp.grease_pencil.color = material.diffuse_color
+        #         # Create a new material
+        #         material = bpy.data.materials.new(material_name)
+        #         # Set the material color
+        #         material.diffuse_color = (*hex_to_rgb(material_color), 1.0)
 
-                # Set the first material as world material
-                if is_first:
-                    bpy.context.scene.world.node_tree.nodes["Background"].inputs[0].default_value = material.diffuse_color
-                    is_first = False
+        #         # Add grease pencil version material
+        #         material_gp = bpy.data.materials.new(material_name + " (GP)")
+        #         bpy.data.materials.create_gpencil_data(material_gp)
+        #         material_gp.grease_pencil.color = material.diffuse_color
+
+        #         # Set the first material as world material
+        #         if is_first:
+        #             bpy.context.scene.world.node_tree.nodes["Background"].inputs[0].default_value = material.diffuse_color
+        #             is_first = False
 
 
-            return {"FINISHED"}
+        #     return {"FINISHED"}
 
     def register_blender_module(self):
         bpy.utils.register_class(

@@ -1,3 +1,5 @@
+"""This module handles loading PySide2. First from the DCC packages, then falls back on system site-packages."""
+
 # Load the logging system
 import logging
 logger = logging.getLogger("eds.apps.preflight")
