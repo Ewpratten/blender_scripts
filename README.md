@@ -2,7 +2,7 @@
 
 This repo contains a Python package that can be loaded into multiple DCCs. It contains a collection of small utilities I commonly use.
 
-## Add-ons
+## Features
 
 - Positive Y Camera
   - Add a camera at origin facing positive Y
