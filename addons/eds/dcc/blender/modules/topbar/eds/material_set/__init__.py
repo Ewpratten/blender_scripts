@@ -14,6 +14,8 @@ class ModuleEdsTopbarMaterialLoader(BlenderModule):
         def draw(self, context):
             layout = self.layout
             layout.operator("scene.load_nord_material_preset")
+            layout.operator("scene.load_miwu_material_preset")
+            layout.operator("scene.load_freya_material_preset")
 
 
     def register_blender_module(self):

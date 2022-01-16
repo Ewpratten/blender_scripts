@@ -1,3 +1,5 @@
+from eds.dcc.blender.modules.topbar.eds.material_set.freya import ModuleLoadMaterialPresetFreya
+from eds.dcc.blender.modules.topbar.eds.material_set.miwu import ModuleLoadMaterialPresetMiwu
 from eds.dcc.blender.modules.topbar.eds.material_set.nord import ModuleLoadMaterialPresetNord
 from eds.dcc.blender.modules.topbar.eds.material_set import ModuleEdsTopbarMaterialLoader
 from eds.dcc.blender.modules.operators.preflight import ModuleOperatorPreflightLaunch
@@ -21,7 +23,9 @@ BLENDER_LOAD_MODULES = [
     ModuleEdsTopbar,
     ModuleOperatorPreflightLaunch,
     ModuleEdsTopbarMaterialLoader,
-    ModuleLoadMaterialPresetNord
+    ModuleLoadMaterialPresetNord,
+    ModuleLoadMaterialPresetMiwu,
+    ModuleLoadMaterialPresetFreya,
 ]
 
 
