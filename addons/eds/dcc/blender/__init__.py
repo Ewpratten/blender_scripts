@@ -1,3 +1,4 @@
+from eds.dcc.blender.modules.operators.self_updater import ModuleOperatorSelfUpdaterLaunch
 from eds.dcc.blender.modules.topbar.eds.material_set.freya import ModuleLoadMaterialPresetFreya
 from eds.dcc.blender.modules.topbar.eds.material_set.miwu import ModuleLoadMaterialPresetMiwu
 from eds.dcc.blender.modules.topbar.eds.material_set.nord import ModuleLoadMaterialPresetNord
@@ -26,6 +27,7 @@ BLENDER_LOAD_MODULES = [
     ModuleLoadMaterialPresetNord,
     ModuleLoadMaterialPresetMiwu,
     ModuleLoadMaterialPresetFreya,
+    ModuleOperatorSelfUpdaterLaunch,
 ]
 
 

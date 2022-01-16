@@ -14,6 +14,8 @@ class ModuleEdsTopbar(BlenderModule):
             layout = self.layout
             layout.operator("scene.launch_preflight")
             layout.menu("TOPBAR_MT_eds_material_menu")
+            layout.separator()
+            layout.operator("scene.launch_self_updater")
 
         def menu_draw(self, context):
             """Drawing entrypoint for the root of this menu structure"""
