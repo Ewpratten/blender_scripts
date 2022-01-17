@@ -20,7 +20,7 @@ class PreflightWindow(QtWidgets.QWidget):
 
         # Configure the window's display settings
         self.setWindowFlags(
-            self.windowFlags() ^ Qt.WindowStaysOnTopHint)
+            self.windowFlags() ^ Qt.WindowStaysOnTopHint ^ Qt.Window)
         self.setWindowTitle("Preflight")
         self.resize(400, 600)
         center_window(self)

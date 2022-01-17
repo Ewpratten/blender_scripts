@@ -24,7 +24,7 @@ class CameraPickerWindow(QtWidgets.QWidget):
 
         # Configure the window's display settings
         self.setWindowFlags(
-            self.windowFlags() ^ Qt.WindowStaysOnTopHint)
+            self.windowFlags() ^ Qt.WindowStaysOnTopHint ^ Qt.Window)
         self.setWindowTitle("Camera Picker")
         self.resize(300, 300)
         center_window(self)

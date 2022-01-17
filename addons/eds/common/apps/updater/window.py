@@ -17,7 +17,7 @@ class SelfUpdaterWindow(QtWidgets.QWidget):
 
         # Configure the window's display settings
         self.setWindowFlags(
-            self.windowFlags() ^ Qt.WindowStaysOnTopHint)
+            self.windowFlags() ^ Qt.WindowStaysOnTopHint ^ Qt.Window)
         self.setWindowTitle("EDS Self-Updater")
         self.resize(400, 300)
         center_window(self)

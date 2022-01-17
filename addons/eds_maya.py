@@ -25,5 +25,20 @@ else:
 import sys
 sys.path.append(os.path.join(eds_path, ".."))
 
+# We also require pymel. If it is not accessible, we can load it from git
+try:
+    print("[EDS Maya Bootstrap] Attempting to import pymel from the DCC python path")
+    import pymel
+except ImportError as e:
+    print("[EDS Maya Bootstrap] Could not import pymel. Loading vendored version instead")
+
+    # We need to import pymel from the vendored version
+    pymel_path = os.path.join(eds_path, "../../third_party/pymel")
+    print(f"[EDS Maya Bootstrap] Using the following path for pymel: {pymel_path}")
+    sys.path.append(pymel_path)
+
+    # Now we can import pymel
+    import pymel
+
 # Now we can import the eds module
 from eds.dcc.maya import initializePlugin, uninitializePlugin

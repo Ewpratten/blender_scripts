@@ -25,7 +25,7 @@ class MaterialPresetSettingsWindow(QtWidgets.QWidget):
 
         # Configure the window's display settings
         self.setWindowFlags(
-            self.windowFlags() ^ Qt.WindowStaysOnTopHint)
+            self.windowFlags() ^ Qt.WindowStaysOnTopHint ^ Qt.Window)
         self.setWindowTitle("Preset Loading Options")
         self.resize(300, 200)
         center_window(self)

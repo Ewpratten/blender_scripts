@@ -4,6 +4,7 @@ This repo contains a Python package that can be loaded into multiple DCCs. It co
 
 ## Features
 
+- One plugin that works in all DCCs
 - Positive Y Camera
   - Add a camera at origin facing positive Y
 - Camera Utils
@@ -16,8 +17,20 @@ This repo contains a Python package that can be loaded into multiple DCCs. It co
 - Material presets
   - Quickly load various color palettes into your material set
 
+### Multi-DCC Usage
+
+The following steps are the only differences between running this plugin in each DCC.
+
 ## Using with Blender
 
 Just clone this repo, and add it as your scripts directory in `Edit > Preferences > File Paths > Scripts`. All add-ons will show up in the add-ons menu.
 
 You will also need PySide2 installed on your system.
+
+## Using with Maya
+
+Simply launch Maya using the following. The plugin will enter "bootstrap mode" and handle the rest of the loading work for you.
+
+```sh
+MAYA_PLUG_IN_PATH=/path/to/dcc_scripts/addons maya
+```
