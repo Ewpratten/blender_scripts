@@ -13,6 +13,7 @@ class ModuleOperatorSelfUpdaterLaunch(BlenderModule):
     class SelfUpdaterLaunchOperator(bpy.types.Operator):
         bl_idname = "scene.launch_self_updater"
         bl_label = "Launch Updater"
+        bl_description = "Update EDS or switch versions"
 
         def execute(self, context):
             logger.info("Launching self-update tool")

@@ -14,6 +14,7 @@ class ModuleOperatorCameraPickerLaunch(BlenderModule):
     class CameraPickerLaunchOperator(bpy.types.Operator):
         bl_idname = "scene.launch_camera_picker"
         bl_label = "Camera Picker"
+        bl_description = "A tool for working with multiple cameras"
 
         def execute(self, context):
             logger.info("Launching camera picker tool")

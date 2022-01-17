@@ -14,6 +14,7 @@ class ModuleOperatorPreflightLaunch(BlenderModule):
     class PreflightToolLaunchOperator(bpy.types.Operator):
         bl_idname = "scene.launch_preflight"
         bl_label = "Launch Preflight"
+        bl_description = "Checks your project for common errors"
 
         def execute(self, context):
             logger.info("Launching preflight tool")
