@@ -3,7 +3,6 @@ import bpy
 
 from eds.dcc.blender.module import BlenderModule
 
-
 class ModuleEdsTopbar(BlenderModule):
     """This module adds an extensible menu to the editor top bar"""
 
@@ -15,6 +14,7 @@ class ModuleEdsTopbar(BlenderModule):
             layout.operator("scene.launch_preflight", icon="INFO")
             layout.menu("TOPBAR_MT_eds_material_menu")
             layout.operator("scene.launch_camera_picker", icon="CAMERA_DATA")
+            layout.operator("scene.launch_monocular_depth_import", icon="MESH_GRID")
             layout.separator()
             layout.operator("scene.launch_self_updater", icon="FILE_REFRESH")
 

@@ -13,6 +13,8 @@ from eds.dcc.blender.modules.add_menu.pos_y_camera import ModuleAddYAlignedCamer
 
 import bpy
 import logging
+
+from eds.dcc.blender.modules.topbar.eds.monocular_depth import ModuleOperatorMonocularDepthImport
 logger = logging.getLogger("eds.blender")
 
 # Modules
@@ -30,6 +32,7 @@ BLENDER_LOAD_MODULES = [
     ModuleLoadMaterialPresetFreya,
     ModuleOperatorSelfUpdaterLaunch,
     ModuleOperatorCameraPickerLaunch,
+    ModuleOperatorMonocularDepthImport
 ]
 
 

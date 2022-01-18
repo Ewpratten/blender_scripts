@@ -18,3 +18,8 @@ QCheckBox:disabled {
     background-color:#272727;
     color: #444444;
 }
+
+QPushButton:disabled {
+    background-color:#272727;
+    color: #444444;
+}
