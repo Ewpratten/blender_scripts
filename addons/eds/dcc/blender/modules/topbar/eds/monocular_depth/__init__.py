@@ -38,7 +38,7 @@ class ModuleOperatorMonocularDepthImport(BlenderModule):
             # Subdivide the plane 12 times
             logger.info("Subdividing plane")
             bpy.ops.object.mode_set(mode='EDIT')
-            bpy.ops.mesh.subdivide(number_cuts=48)
+            bpy.ops.mesh.subdivide(number_cuts=128)
             bpy.ops.object.mode_set(mode='OBJECT')
 
             # Apply a displace modifier to the plane
